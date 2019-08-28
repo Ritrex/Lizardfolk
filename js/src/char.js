@@ -7,6 +7,14 @@ class Character {
     this.x = x;
     this.y = y;
   }
+  getPossibleMoves(map) {
+    //y es movimiento horizontal
+    //x es movimiento vertical
+    let moves = [];
+    if (true)
+      if (map.maptxt[this.x - 1][this.y]) {
+      }
+  }
 }
 
 class Lizard extends Character {
@@ -32,3 +40,7 @@ class Human extends Character {
     return paths;
   }
 }
+
+var pc;
+
+var humans;
