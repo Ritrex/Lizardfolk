@@ -1,3 +1,7 @@
+const floorTiles = ["F", "w"];
+const metaTiles = ["G", "S"];
+const wallTiles = ["."];
+const furnitureTiles = ["T", "C"];
 class Character {
   constructor(width = 0, height = 0, imgs = [], x = 0, y = 0) {
     this.width = width;
@@ -7,19 +11,63 @@ class Character {
     this.x = x;
     this.y = y;
   }
-  getPossibleMoves(map) {
-    //y es movimiento horizontal
+  getPossibleMoves(map, x, y, exclusionlist = []) {
     //x es movimiento vertical
+    //y es movimiento horizontal
+
     let moves = [];
-    if (true)
-      if (map.maptxt[this.x - 1][this.y]) {
+    if (x > 0) {
+      let northofChar = map.maptxt[x - 1][y];
+      if (exclusionlist.indexOf(northofChar) > -1) {
+        moves.push("N");
       }
+    }
+    if (x < map.maptxt.length) {
+      let southofChar = map.maptxt[x + 1][y];
+      if (exclusionlist.indexOf(southofChar) > -1) moves.push("S");
+    }
+
+    if (y > 0) {
+      let westOfChar = map.maptxt[x][y - 1];
+      if (exclusionlist.indexOf(westOfChar) > -1) moves.push("W");
+    }
+
+    if (y > map.maptxt.length) {
+      let eastOfChar = map.maptxt[x][y + 1];
+      if (exclusionlist.indexOf(eastOfChar) > -1) moves.push("E");
+    }
+    return moves;
   }
 }
 
 class Lizard extends Character {
   constructor(width, height, imgs, x, y) {
     super(width, height, imgs, x, y);
+  }
+
+  move(map, direction = "") {
+    if (direction === "") return;
+    let res = this.getPossibleMoves(map, this.x, this.y, wallTiles);
+    console.log(res);
+    if (res.indexOf(direction) > -1)
+      switch (direction) {
+        case "N":
+          this.x--;
+          break;
+        case "S":
+          this.x++;
+          break;
+        case "E":
+          this.y++;
+          break;
+        case "W":
+          this.y--;
+          break;
+      }
+
+    //it exist in the array if its not a wall
+
+    return res;
   }
 }
 
@@ -34,8 +82,9 @@ class Human extends Character {
     this.lizardlastseenYposition;
   }
 
+  getPossibleMoves(map) {}
   getPosiblePaths(mapa) {
-    let paths = [];
+    let paths = su;
     //SOmething happens here
     return paths;
   }
