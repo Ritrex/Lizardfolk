@@ -19,20 +19,14 @@ $(document).ready(function() {
   //Cada imagen que se va a usar tiene que mandarse a llamar al menos una vez aqui
   //para que no se tenga que estar cargando al momento.
   //Esto evita que solo se carguen fragmentos del labetirno o que no se imprima.
-  floorim.src = "./../../img/floor2.png";
-  wallim.src = "./../../img/simplewall.png";
-  pcim.src = "./../../img/pcfaacingnorth.png";
-  fogim.src = "./../../img/unknown.png";
-  soundsrcim.src = "./../../img/soundsrc.png";
-  opencupim.src = "./../../img/closedcupboard.png";
-  closedcupim.src = "./../../img/greyclosedcupboard.png";
-  pc = new Lizard(
-    tileXsize,
-    tileYsize,
-    [(new Image().src = "./../../img/pcfaacingnorth.png")],
-    1,
-    1
-  );
+  floorim.src = "./../../css/img/floor2.png";
+  wallim.src = "./../../css/img/simplewall.png";
+  pcim.src = "./../../css/img/pcfaacingnorth.png";
+  fogim.src = "./../../css/img/unknown.png";
+  soundsrcim.src = "./../../css/img/soundsrc.png";
+  opencupim.src = "./../../css/img/greyopencupboard.png
+  closedcupim.src = "./../../css/img/greyclosedcupboard.png";
+  pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
   humans = [];
   humans.push(
     new Human(
@@ -71,11 +65,11 @@ $(document).ready(function() {
     this.console.log(key);
     if (["w", "W"].indexOf(key) > -1) pc.move(floor1, "N");
     //derecha
-    if (["d", "D"].indexOf(key) > -1) pc.move(floor1, "W");
+    if (["d", "D"].indexOf(key) > -1) pc.move(floor1, "E");
     //abajo
     if (["s", "S"].indexOf(key) > -1) pc.move(floor1, "S");
     //izquierda
-    if (["a", "A"].indexOf(key) > -1) pc.move(floor1, "E");
+    if (["a", "A"].indexOf(key) > -1) pc.move(floor1, "W");
   });
   framecount = 0;
 

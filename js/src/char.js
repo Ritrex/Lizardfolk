@@ -18,23 +18,24 @@ class Character {
     let moves = [];
     if (x > 0) {
       let northofChar = map.maptxt[x - 1][y];
-      if (exclusionlist.indexOf(northofChar) > -1) {
+      console.log(`Considered  ${exclusionlist.indexOf(northofChar) > -1}`);
+      if (exclusionlist.indexOf(northofChar) < 0) {
         moves.push("N");
       }
     }
     if (x < map.maptxt.length) {
       let southofChar = map.maptxt[x + 1][y];
-      if (exclusionlist.indexOf(southofChar) > -1) moves.push("S");
+      if (exclusionlist.indexOf(southofChar) < 0) moves.push("S");
     }
 
     if (y > 0) {
       let westOfChar = map.maptxt[x][y - 1];
-      if (exclusionlist.indexOf(westOfChar) > -1) moves.push("W");
+      if (exclusionlist.indexOf(westOfChar) < 0) moves.push("W");
     }
 
-    if (y > map.maptxt.length) {
+    if (y < map.maptxt.length) {
       let eastOfChar = map.maptxt[x][y + 1];
-      if (exclusionlist.indexOf(eastOfChar) > -1) moves.push("E");
+      if (exclusionlist.indexOf(eastOfChar) < 0) moves.push("E");
     }
     return moves;
   }
