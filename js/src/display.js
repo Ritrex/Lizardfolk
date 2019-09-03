@@ -21,6 +21,8 @@ function updateDisplay() {
   /**THIS SECTION IS PROVISIONAL UNTIL VISION FUNCTIONS ARE IMPLEMENTED */
   ctx.clearRect(0, 0, cnv.width, cnv.height);
   ctx.fillStyle = "blue";
+  setCoveredDisplay();
+  pc.vision;
   for (var i = 0; i < floor1.layout.length; i++) {
     for (var j = 0; j < floor1.layout[i].length; j++) {
       // ctx.fillText(floor1.maptxt[i][j],(1 + i) * tw,(1 + j) * th)

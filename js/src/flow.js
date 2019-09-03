@@ -19,13 +19,28 @@ $(document).ready(function() {
   //Cada imagen que se va a usar tiene que mandarse a llamar al menos una vez aqui
   //para que no se tenga que estar cargando al momento.
   //Esto evita que solo se carguen fragmentos del labetirno o que no se imprima.
-  floorim.src = "./../../css/img/floor2.png";
-  wallim.src = "./../../css/img/simplewall.png";
-  pcim.src = "./../../css/img/pcfaacingnorth.png";
-  fogim.src = "./../../css/img/unknown.png";
-  soundsrcim.src = "./../../css/img/soundsrc.png";
-  opencupim.src = "./../../css/img/greyopencupboard.png";
-  closedcupim.src = "./../../css/img/greyclosedcupboard.png";
+
+  //floorim.src = "./../../css/img/floor2.png";
+  floorim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/floor.png";
+  //wallim.src = "./../../css/img/simplewall.png";
+  wallim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/simplewall.png";
+  //pcim.src = "./../../css/img/pcfaacingnorth.png";
+  pcim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/pcfaacingnorth.png";
+  //fogim.src = "./../../css/img/unknown.png";
+  fogim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/unknown.png";
+  //soundsrcim.src = "./../../css/img/soundsrc.png";
+  soundsrcim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/soundsrc.png";
+  //opencupim.src = "./../../css/img/greyopencupboard.png";
+  opencupim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greyopencupboard.png";
+  //closedcupim.src = "./../../css/img/greyclosedcupboard.png";
+  closedcupim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greyclosedcupboard.png";
   pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
   humans = [];
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 22, 1));
