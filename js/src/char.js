@@ -70,6 +70,33 @@ class Lizard extends Character {
 
     return res;
   }
+
+  vision(map) {
+    let queue = [].unshift([this.x, this.y]);
+    let visited = [];
+
+    while (queue.length > 1) {
+      let position = queue.pop();
+      let currentX = position[0];
+      let currentY = position[1];
+      let reach = Math.abs(this.x - currentX) + Math.abs(this.y - currentY);
+      if (reach > 7) queue = [];
+
+      let currentTile = map.layout[currentY][currentX];
+      if (hasVisited(visited, position)) continue;
+      visited.push(position);
+      if (reach > 5) map.fog[currentY][currentX] = -1;
+      else map.fog[currentY][currentX] = 0;
+      //Si es válido
+      if (["T", "C", "."].indexOf(currentTile) < 0) {
+        if (!hasVisited(visited, [currentX + 1, currentY]))
+          queue.unshift([currentX + 1, currentY]);
+        if (!hasVisited(visited, [currentX - 1, currentY]))
+          queue.unshift([currentX - 1, currentY]);
+      }
+    }
+    //return map;
+  }
 }
 
 class Human extends Character {
@@ -83,6 +110,10 @@ class Human extends Character {
     this.lizardlastseenYposition;
   }
 
+  isValid(map, x, y, exclusionlist) {
+    let res = x > 0 && x < map.layout.length && y > 0 && map.layout[0].length;
+    return res;
+  }
   getPossibleMoves(map) {}
   getPosiblePaths(mapa) {
     let paths = su;
@@ -90,7 +121,14 @@ class Human extends Character {
     return paths;
   }
 }
-
+function hasVisited(arr, elem) {
+  let hasvisited = false;
+  arr.forEach(element => {
+    hasvisited =
+      hasvisited || (element[0] === elem[0] && element[1] === elem[1]);
+  });
+  return hasvisited;
+}
 var pc;
 
 var humans;
