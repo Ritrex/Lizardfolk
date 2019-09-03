@@ -29,14 +29,10 @@ $(document).ready(function() {
   pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
   humans = [];
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 22, 1));
-  floor1 = new Map(
-    [],
-    [],
-    pc,
-    humans,
-    [["L", pc.x, pc.y], ["H", humans[0].x, humans[0].y]],
-    []
-  );
+  floor1 = new Map([], [], pc, humans, [
+    ["L", pc.x, pc.y],
+    ["H", humans[0].x, humans[0].y]
+  ]);
   strtbtn = document.getElementById("start");
   $(strtbtn).on(
     "click",

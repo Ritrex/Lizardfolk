@@ -6,6 +6,7 @@ const mapfloor1fogback =
 const mapback =
   ".............................\n.FFFFF.FFFFFFFFFFFFF.FFFFF...\n.F.FFF.....F.F.FFFFF.F.FFF...\n.F.FFF.FFFFF.F.FFFFF.F.FFF...\n.F.FFF.FFFFF.S.FFFFF.F.FFF...\n.F.FFF.FFFFF.S.FFFFFFF.FFF...\n.F...F.FFFFF...........F.F...\n.FFFFF.FFFFF.FFF.FFFFFFF.FFF.\n.F.....F.....FFF.FFF.FFF.FFF.\n.F.FFFFFFFFF.FFFFFFF.FFF.FFF.\n.F.FFF.FFFFF.FFF...F.FFF.FFF.\n.FFFFF.FFFFFFFFF.F.F.FFF.FFF.\n...F...F.....F...F.F.F...F...\n.FFFFFFFFFFFFFFF.FFFFF.FFFFF.\n.FFFFF.FFFFF.FFF.FFFFF.FFF.F.\n.FFFFF.FFFFF.FFF.FFFFF.FFF.F.\n.....F.......FFF.FFFFF.....F.\n.S.FFFFFFFFF.FFFFFFFFFFFFFFF.\n.S.FFFFF...F.F.........FFF.F.\n.FFFFFFF.FFFFF.FFFFF...FFF.F.\n.F.FFFFF.FFFFF.FFFFF...FFF.F.\n.F.FFFFF.FFFFF.FFFFFFFFFFF.F.\n.F...F.........FFFFF.....F.F.\n.FFFFFFFFFFFFF.FFFFF.FFFFF.F.\n.F.FFFFF.FFFFF.F.....FFFFF.F.\n.F.FFFFF.FFFFFFFFFFFFFFFFF.F.\n.F.............FFFFF.......F.\n.FFFFFFFFFFFFFFFFFFFFFFFFFFF.\n.............................\n";
 const testmap = "......\n.FFFF.\n.F.FF.\n..FF..\n.F.FF.\n...FF.\n......";
+const fogtestmap = "111111\n111111\n111111\n111111\n111111\n111111\n111111";
 //for(let i =0;i<floor1.maptxt.length;i++){console.log(floor1.layout[i])}
 
 class Map {
@@ -23,29 +24,34 @@ class Map {
     fog = [],
     fov = [],
     light = [],
-    mapstring = testmap
+    mapstring = testmap,
+    mapfo = fogtestmap
   ) {
     this.layout = layout;
     this.furniture = furniture;
     this.lizard = lizards;
     this.humans = humans;
     let f = [];
+    let fo = [];
     mapstring.split("\n").forEach(element => {
       f.push(element.split(""));
     });
+    mapfo.split("\n").forEach(element => {
+      fo.push(element.split(""));
+    });
+    fog = fo;
     //f.pop();
     //transpose(f);
     this.maptxt = f;
     this.layout = this.maptxt;
-    f = [];
-    for (let i = 0; i < layout.length; i++) {
-      f.push([]);
-      for (let j = 0; j < layout[i].length; j++) {
-        f[i].push(1);
-      }
-      console.log(f);
-    }
-    this.fog = f;
+    //f = [];
+    // for (let i = 0; i < layout.length; i++) {
+    //   for (let j = 0; j < layout[i].length; j++) {
+    //     fo[i][j] = 1;
+    //   }
+    // }
+    console.log(fo);
+    this.fog = fo;
     // for (var i = 0; i < this.layout.length; i++) {
     //   this.fog.push(new Array(this.layout[0].length));
     //   for (var j = 0; j < this.layout[0].length; j++) {
