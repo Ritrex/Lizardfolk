@@ -89,10 +89,22 @@ class Lizard extends Character {
       else map.fog[currentY][currentX] = 0;
       //Si es válido
       if (["T", "C", "."].indexOf(currentTile) < 0) {
-        if (!hasVisited(visited, [currentX + 1, currentY]))
+        if (!hasVisited(visited, [currentX + 1, currentY])) {
           queue.unshift([currentX + 1, currentY]);
-        if (!hasVisited(visited, [currentX - 1, currentY]))
+          visited.push([currentX + 1, currentY]);
+        }
+        if (!hasVisited(visited, [currentX - 1, currentY])) {
           queue.unshift([currentX - 1, currentY]);
+          visited.push([currentX - 1, currentY]);
+        }
+        if (!hasVisited(visited, [currentX, currentY + 1])) {
+          queue.unshift([currentX, currentY + 1]);
+          visited.push([currentX, currentY + 1]);
+        }
+        if (!hasVisited(visited, [currentX, currentY - 1])) {
+          queue.unshift([currentX, currentY - 1]);
+          visited.push([currentX, currentY - 1]);
+        }
       }
     }
     //return map;
@@ -114,11 +126,32 @@ class Human extends Character {
     let res = x > 0 && x < map.layout.length && y > 0 && map.layout[0].length;
     return res;
   }
-  getPossibleMoves(map) {}
   getPosiblePaths(mapa) {
     let paths = su;
     //SOmething happens here
     return paths;
+  }
+  move() {
+    let moves = this.getPossibleMoves(floor1, this.x, this.y, ["T", "C", "."]);
+    let pick;
+    console.log(`Human: ${this.x},${this.y},${moves.length}`);
+    pick = moves[~~(Math.random() * moves.length)];
+    switch (pick) {
+      case "N":
+        this.x--;
+        break;
+      case "S":
+        this.x++;
+        break;
+      case "E":
+        this.y--;
+        break;
+      case "W":
+        this.y++;
+        break;
+      default:
+        break;
+    }
   }
 }
 function hasVisited(arr, elem) {

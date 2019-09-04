@@ -8,6 +8,8 @@ const fogim = new Image();
 const opencupim = new Image();
 const closedcupim = new Image();
 const soundsrcim = new Image();
+const humanim = new Image();
+const youdiedim = new Image();
 $(document).ready(function() {
   cnv = document.getElementById("cnv");
   ctx = cnv.getContext("2d");
@@ -41,31 +43,42 @@ $(document).ready(function() {
   //closedcupim.src = "./../../css/img/greyclosedcupboard.png";
   closedcupim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greyclosedcupboard.png";
-  pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
-  humans = [];
-  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 22, 1));
-  floor1 = new Map([], [], pc, humans, [
-    ["L", pc.x, pc.y],
-    ["H", humans[0].x, humans[0].y]
-  ]);
-  strtbtn = document.getElementById("start");
-  $(strtbtn).on(
-    "click",
-    () =>
-      (gameInterval = setInterval(function() {
-        updateDisplay();
-        drawPC();
+  //humanim.src = "./../../css/img/human.png";
+  humanim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/human.png";
+  //youdiedim.src = "./../../css/img/youdied.jpg";
+  youdiedim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+  //initialize();
 
-        if (framecount > 10) {
-          //move humans
-        }
+  strtbtn = document.getElementById("start");
+  $(strtbtn).on("click", () => {
+    gameInterval = setInterval(function() {
+      updateDisplay();
+      drawPC();
+
+      if (framecount % 10 == 0) {
         floor1.humans.forEach(element => {
-          drawHuman(element);
+          if (element.x === pc.x && element.y == pc.y) {
+            clearInterval(gameInterval);
+            ctx.clearRect(0, 0, cnv.width, cnv.height);
+            floor1 = undefined;
+
+            // pc=undefined;
+            // humans=undefined;
+          }
+          element.move();
         });
-        console.log(`X:${pc.x},Y:${pc.y}`);
-        framecount = ++framecount % 60;
-      }, 1000 / 60))
-  );
+      }
+      floor1.humans.forEach(element => {
+        drawHuman(element);
+      });
+
+      console.log(`X:${pc.x},Y:${pc.y}`);
+      framecount = ++framecount % 60;
+    }, 1000 / 10);
+    initialize();
+  });
   //setCoveredDisplay();
   //updateDisplay();
   window.addEventListener("keypress", function() {
@@ -84,9 +97,18 @@ $(document).ready(function() {
       if (["a", "A"].indexOf(key) > -1) pc.move(floor1, "W");
     }
   });
-  framecount = 0;
 
   console.log("READY");
 });
 
+function initialize() {
+  pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
+  humans = [];
+  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 3, 3));
+  floor1 = new Map([], [], pc, humans, [
+    ["L", pc.x, pc.y],
+    ["H", humans[0].x, humans[0].y]
+  ]);
+  framecount = 0;
+}
 //$("");
