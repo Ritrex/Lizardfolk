@@ -10,12 +10,13 @@ const closedcupim = new Image();
 const soundsrcim = new Image();
 const humanim = new Image();
 const youdiedim = new Image();
+const ringim = new Image();
 $(document).ready(function() {
   cnv = document.getElementById("cnv");
   ctx = cnv.getContext("2d");
 
-  tileXsize = cnv.width / 10;
-  tileYsize = cnv.height / 10;
+  tileXsize = cnv.width / 40;
+  tileYsize = cnv.height / 40;
 
   im = new Image();
   //Cada imagen que se va a usar tiene que mandarse a llamar al menos una vez aqui
@@ -46,10 +47,11 @@ $(document).ready(function() {
   //humanim.src = "./../../css/img/human.png";
   humanim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/human.png";
-  //youdiedim.src = "./../../css/img/youdied.jpg";
-  youdiedim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
-  //initialize();
+  youdiedim.src = "./../../css/img/youdied.jpg";
+  //youdiedim.src =
+  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+  ringim.src = "./../../css/img/ring.png";
+  initialize();
 
   strtbtn = document.getElementById("start");
   $(strtbtn).on("click", () => {
@@ -59,15 +61,16 @@ $(document).ready(function() {
 
       if (framecount % 10 == 0) {
         floor1.humans.forEach(element => {
+          element.move();
+          drawHuman(element);
+          element.move();
+          drawHuman(element);
           if (element.x === pc.x && element.y == pc.y) {
-            clearInterval(gameInterval);
-            ctx.clearRect(0, 0, cnv.width, cnv.height);
-            floor1 = undefined;
+            finish();
 
             // pc=undefined;
             // humans=undefined;
           }
-          element.move();
         });
       }
       floor1.humans.forEach(element => {
@@ -86,16 +89,14 @@ $(document).ready(function() {
     console.log(key);
 
     this.console.log(key);
-    if (framecount > 15) {
-      //arriba
-      if (["w", "W"].indexOf(key) > -1) pc.move(floor1, "N");
-      //derecha
-      if (["d", "D"].indexOf(key) > -1) pc.move(floor1, "E");
-      //abajo
-      if (["s", "S"].indexOf(key) > -1) pc.move(floor1, "S");
-      //izquierda
-      if (["a", "A"].indexOf(key) > -1) pc.move(floor1, "W");
-    }
+    //arriba
+    if (["w", "W"].indexOf(key) > -1) pc.move(floor1, "N");
+    //derecha
+    if (["d", "D"].indexOf(key) > -1) pc.move(floor1, "E");
+    //abajo
+    if (["s", "S"].indexOf(key) > -1) pc.move(floor1, "S");
+    //izquierda
+    if (["a", "A"].indexOf(key) > -1) pc.move(floor1, "W");
   });
 
   console.log("READY");
@@ -104,11 +105,19 @@ $(document).ready(function() {
 function initialize() {
   pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
   humans = [];
+  console.log(pc.x);
+
+  floor1 = new Map([], pc, [], [], fzero, fogfzero);
+  //tileXsize
+  //for (let e = 0; e < 3; e++) {
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 3, 3));
-  floor1 = new Map([], [], pc, humans, [
-    ["L", pc.x, pc.y],
-    ["H", humans[0].x, humans[0].y]
-  ]);
+  //}
+  floor1.humans = humans;
   framecount = 0;
 }
 //$("");
+function finish() {
+  clearInterval(gameInterval);
+  ctx.clearRect(0, 0, cnv.width, cnv.height);
+  floor1 = undefined;
+}

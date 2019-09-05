@@ -72,45 +72,66 @@ class Lizard extends Character {
   }
 
   vision(map) {
-    let queue = [].unshift([this.x, this.y]);
+    let queue = [];
+    queue.unshift([this.y, this.x]);
     let visited = [];
+    map.fog[this.y][this.x] = 0;
 
-    while (queue.length > 1) {
-      let position = queue.pop();
-      let currentX = position[0];
-      let currentY = position[1];
-      let reach = Math.abs(this.x - currentX) + Math.abs(this.y - currentY);
-      if (reach > 7) queue = [];
+    return this.visionaux(map, 7, 0, visited, this.x, this.y, queue);
+  }
 
-      let currentTile = map.layout[currentY][currentX];
-      if (hasVisited(visited, position)) continue;
-      visited.push(position);
-      if (reach > 5) map.fog[currentY][currentX] = -1;
-      else map.fog[currentY][currentX] = 0;
-      //Si es válido
-      if (["T", "C", "."].indexOf(currentTile) < 0) {
-        if (!hasVisited(visited, [currentX + 1, currentY])) {
-          queue.unshift([currentX + 1, currentY]);
-          visited.push([currentX + 1, currentY]);
-        }
-        if (!hasVisited(visited, [currentX - 1, currentY])) {
-          queue.unshift([currentX - 1, currentY]);
-          visited.push([currentX - 1, currentY]);
-        }
-        if (!hasVisited(visited, [currentX, currentY + 1])) {
-          queue.unshift([currentX, currentY + 1]);
-          visited.push([currentX, currentY + 1]);
-        }
-        if (!hasVisited(visited, [currentX, currentY - 1])) {
-          queue.unshift([currentX, currentY - 1]);
-          visited.push([currentX, currentY - 1]);
-        }
-      }
+  visionaux(map, maxdepth, currentDepth, visited, x, y, path) {
+    if (hasVisited(visited, [x, y]) || currentDepth > maxdepth) return;
+    let fog = map.fog;
+    let lay = map.layout;
+    let currentTile = lay[x][y];
+    if (currentDepth > 5) fog[x][y] = 0;
+    if (currentDepth < 6) fog[x][y] = 0;
+    visited.push([x, y]);
+    if (wallTiles.indexOf(currentTile) < 0) {
+      if (!hasVisited(visited, [x + 1, y]))
+        this.visionaux(
+          map,
+          maxdepth,
+          currentDepth + 1,
+          visited,
+          x + 1,
+          y,
+          path
+        );
+      if (!hasVisited(visited, [x - 1, y]))
+        this.visionaux(
+          map,
+          maxdepth,
+          currentDepth + 1,
+          visited,
+          x - 1,
+          y,
+          path
+        );
+      if (!hasVisited(visited, [x, y + 1]))
+        this.visionaux(
+          map,
+          maxdepth,
+          currentDepth + 1,
+          visited,
+          x,
+          y + 1,
+          path
+        );
+      if (!hasVisited(visited, [x, y - 1]))
+        this.visionaux(
+          map,
+          maxdepth,
+          currentDepth + 1,
+          visited,
+          x,
+          y - 1,
+          path
+        );
     }
-    //return map;
   }
 }
-
 class Human extends Character {
   constructor(width, height, imgs, x, y) {
     super(width, height, imgs, x, y);
@@ -134,8 +155,9 @@ class Human extends Character {
   move() {
     let moves = this.getPossibleMoves(floor1, this.x, this.y, ["T", "C", "."]);
     let pick;
-    console.log(`Human: ${this.x},${this.y},${moves.length}`);
-    pick = moves[~~(Math.random() * moves.length)];
+    console.log(`Human: ${this.x},${this.y},${moves}`);
+    if (["C", "T"].indexOf(floor1.layout[pc.x][pc.y]))
+      pick = moves[~~(Math.random() * moves.length)];
     switch (pick) {
       case "N":
         this.x--;
@@ -144,16 +166,17 @@ class Human extends Character {
         this.x++;
         break;
       case "E":
-        this.y--;
+        this.y++;
         break;
       case "W":
-        this.y++;
+        this.y--;
         break;
       default:
         break;
     }
   }
 }
+
 function hasVisited(arr, elem) {
   let hasvisited = false;
   arr.forEach(element => {
@@ -162,6 +185,7 @@ function hasVisited(arr, elem) {
   });
   return hasvisited;
 }
+
 var pc;
 
 var humans;
