@@ -81,7 +81,7 @@ $(document).ready(function() {
             //drawHuman(element);
           }
           if (element.x === pc.x && element.y == pc.y) {
-            finish();
+            finish(false);
 
             // pc=undefined;
             // humans=undefined;
