@@ -53,15 +53,16 @@ $(document).ready(function() {
   youdiedim.src = "./../../css/img/youdied.jpg";
   //youdiedim.src =
   //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
-  ringim.src = "./../../css/img/ring.png";
-  //ringim.src =
-  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
-  winim.src = "./../../css/img/win.png";
+  //ringim.src = "./../../css/img/ring.png";
+  ringim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/ring.png";
+  //winim.src = "./../../css/img/win.png";
   //wingim.src =
   //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
-  winim.src = "./../../css/img/lose.png";
-  //loseim.src =
-  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+  winim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/win1.jpg";
+  loseim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/lose.jpg";
 
   initialize();
 

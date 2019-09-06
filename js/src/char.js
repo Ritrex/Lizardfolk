@@ -75,7 +75,7 @@ class Lizard extends Character {
      *
      */
     if (map.layout[this.x][this.y] === "G") {
-      finish();
+      finish(true);
     }
     map.humans.forEach(human => {
       if (human.x == this.x && human.y == this.y) finish();
