@@ -2,6 +2,8 @@ const floorTiles = ["F", "w"];
 const metaTiles = ["G", "S"];
 const wallTiles = ["."];
 const furnitureTiles = ["T", "C"];
+const sq2 = Math.sqrt(2);
+
 class Character {
   constructor(width = 0, height = 0, imgs = [], x = 0, y = 0) {
     this.width = width;
@@ -66,8 +68,18 @@ class Lizard extends Character {
           break;
       }
 
-    //it exist in the array if its not a wall
-
+    /**
+     * This is important.
+     * beacuse it means  that the position of the pc
+     * relative to the board.
+     *
+     */
+    if (map.layout[this.x][this.y] === "G") {
+      finish();
+    }
+    map.humans.forEach(human => {
+      if (human.x == this.x && human.y == this.y) finish();
+    });
     return res;
   }
 
@@ -132,6 +144,7 @@ class Lizard extends Character {
     }
   }
 }
+
 class Human extends Character {
   constructor(width, height, imgs, x, y) {
     super(width, height, imgs, x, y);
@@ -156,8 +169,47 @@ class Human extends Character {
     let moves = this.getPossibleMoves(floor1, this.x, this.y, ["T", "C", "."]);
     let pick;
     console.log(`Human: ${this.x},${this.y},${moves}`);
-    if (["C", "T"].indexOf(floor1.layout[pc.x][pc.y]))
+    if (
+      ["C", "T"].indexOf(floor1.layout[pc.x][pc.y]) > -1 ||
+      Math.sqrt((pc.x - this.x) ** 2 + (pc.y - this.y) ** 2) < 10 * sq2
+    ) {
       pick = moves[~~(Math.random() * moves.length)];
+    } else {
+      let best_move = "Q";
+      let best = 1000;
+      let distancia = 1000;
+      moves.forEach(element => {
+        if (element === "N") {
+          distancia = Math.sqrt((--this.x - pc.x) ** 2 + (this.y - pc.y) ** 2);
+          if (distancia < best) {
+            best = distancia;
+            best_move = "N";
+          }
+        }
+        if (element === "S") {
+          distancia = Math.sqrt((++this.x - pc.x) ** 2 + (this.y - pc.y) ** 2);
+          if (distancia < best) {
+            best = distancia;
+            best_move = "S";
+          }
+        }
+        if (element === "E") {
+          distancia = Math.sqrt((this.x - pc.x) ** 2 + (++this.y - pc.y) ** 2);
+          if (distancia < best) {
+            best = distancia;
+            best_move = "E";
+          }
+        }
+        if (element === "W") {
+          distancia = Math.sqrt((this.x - pc.x) ** 2 + (--this.y - pc.y) ** 2);
+          if (distancia < best) {
+            best = distancia;
+            best_move = "W";
+          }
+        }
+        pick = best_move;
+      });
+    }
     switch (pick) {
       case "N":
         this.x--;

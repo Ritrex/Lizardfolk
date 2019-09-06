@@ -66,6 +66,22 @@ function updateDisplay() {
             tileYsize
           );
         }
+        if (floor1.maptxt[i][j] === "T") {
+          ctx.drawImage(
+            floorim,
+            (1 + j) * tw,
+            (1 + i) * th,
+            tileXsize,
+            tileYsize
+          );
+          ctx.drawImage(
+            closedcupim,
+            (1 + j) * tw,
+            (1 + i) * th,
+            tileXsize,
+            tileYsize
+          );
+        }
         if (floor1.maptxt[i][j] === "G") {
           ctx.drawImage(
             floorim,
@@ -105,8 +121,8 @@ function drawHuman(human) {
   ctx.drawImage(
     humanim,
     tileXsize * (1 + human.y),
-    tileYsize * (1 + human.x),
+    tileYsize * human.x,
     tileXsize,
-    tileYsize
+    tileYsize * 2
   );
 }

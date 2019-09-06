@@ -11,10 +11,13 @@ const soundsrcim = new Image();
 const humanim = new Image();
 const youdiedim = new Image();
 const ringim = new Image();
+const winim = new Image();
+const loseim = new Image();
 $(document).ready(function() {
   cnv = document.getElementById("cnv");
   ctx = cnv.getContext("2d");
 
+  cnv.width = (window.innerWidth / 5) * 4;
   tileXsize = cnv.width / 40;
   tileYsize = cnv.height / 40;
 
@@ -51,20 +54,32 @@ $(document).ready(function() {
   //youdiedim.src =
   //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
   ringim.src = "./../../css/img/ring.png";
+  //ringim.src =
+  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+  winim.src = "./../../css/img/win.png";
+  //wingim.src =
+  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+  winim.src = "./../../css/img/lose.png";
+  //loseim.src =
+  //  "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+
   initialize();
 
   strtbtn = document.getElementById("start");
   $(strtbtn).on("click", () => {
+    $(cnv).toggleClass("no-display");
     gameInterval = setInterval(function() {
       updateDisplay();
       drawPC();
 
-      if (framecount % 10 == 0) {
+      if (framecount % 15 == 0) {
         floor1.humans.forEach(element => {
           element.move();
-          drawHuman(element);
-          element.move();
-          drawHuman(element);
+          //drawHuman(element);
+          if (element.x != pc.x || element.y != pc.y) {
+            element.move();
+            //drawHuman(element);
+          }
           if (element.x === pc.x && element.y == pc.y) {
             finish();
 
@@ -116,8 +131,11 @@ function initialize() {
   framecount = 0;
 }
 //$("");
-function finish() {
+function finish(win) {
+  if (win) ctx.drawImage(winim, 0, 0, cnv.width, cnv.height);
+  else ctx.drawImage(loseim, 0, 0, cnv.width, cnv.height);
   clearInterval(gameInterval);
-  ctx.clearRect(0, 0, cnv.width, cnv.height);
+  //display widifferent images depending
+  //ctx.clearRect(0, 0, cnv.width, cnv.height);
   floor1 = undefined;
 }
