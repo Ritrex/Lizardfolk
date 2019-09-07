@@ -117,4 +117,11 @@ html {
   background-image: url("https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/gooserock.jpg  ");
   background-size: cover;
   background-repeat: no-repeat;
+  width: 100px;
+  height: 30px;
 }
+
+/* #OK {
+  width: 100px;
+  height: 60px;
+} */

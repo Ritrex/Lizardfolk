@@ -1,5 +1,6 @@
 const strtbtn = document.getElementById("start");
-const contbtn = document.getElementById("instrucciones");
+const contbtn = document.getElementById("controles");
+const instscroll = document.getElementById("instrucciones");
 const okbtn = document.getElementById("ok");
 var gameInterval;
 var framecount;
@@ -32,8 +33,8 @@ $(document).ready(function() {
   doorsnd.volume = 0.5;
   cnv.width = window.innerWidth;
   cnv.height = window.innerHeight;
-  tileXsize = cnv.width / 35;
-  tileYsize = cnv.height / 35;
+  tileXsize = cnv.width / 30;
+  tileYsize = cnv.height / 37;
 
   //im = new Image();
   //Cada imagen que se va a usar tiene que mandarse a llamar al menos una vez aqui
@@ -95,13 +96,34 @@ $(document).ready(function() {
 
   $(okbtn).on("click", () => {
     $(cnv).toggleClass("no-display");
+    $(strtbtn).toggleClass("no-display");
+    $(contbtn).toggleClass("no-display");
     playsnd.load();
     winsnd.load();
     lostsnd.load();
   });
-  $(instructionbtn).on("click", () => {});
+  $(instructionbtn).on("click", () => {
+    $(instscroll).toggleClass("no-display");
+    if (instructionbtn.innerText === "OK")
+      instructionbtn.innerText = "Controles";
+    else instructionbtn.innerText = "OK";
+    $("html, body").animate(
+      {
+        scrollTop: $(instructionbtn).offset().top
+      },
+      800
+    );
+  });
   $(strtbtn).on("click", () => {
     $(cnv).toggleClass("no-display");
+    $("html, body").animate(
+      {
+        scrollTop: $("#cnv").offset().top
+      },
+      800
+    );
+    $(strtbtn).toggleClass("no-display");
+    $(contbtn).toggleClass("no-display");
     playsnd.play();
     playsnd.loop = true;
     gameInterval = setInterval(function() {
@@ -125,7 +147,7 @@ $(document).ready(function() {
         });
       }
       floor1.humans.forEach(element => {
-        drawHuman(element);
+        if (floor1.fog[element.x][element.y] < 1) drawHuman(element);
       });
 
       console.log(`X:${pc.x},Y:${pc.y}`);
@@ -173,6 +195,8 @@ function initialize() {
 function finish(win) {
   playsnd.pause();
   playsnd.load();
+
+  $(okbtn).toggleClass("no-display");
   if (win) {
     ctx.drawImage(winim, 0, 0, cnv.width, cnv.height);
     winsnd.play();
