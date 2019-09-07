@@ -98,6 +98,7 @@ $(document).ready(function() {
     $(cnv).toggleClass("no-display");
     $(strtbtn).toggleClass("no-display");
     $(contbtn).toggleClass("no-display");
+    $(okbtn).toggleClass("no-display");
     playsnd.load();
     winsnd.load();
     lostsnd.load();
@@ -183,7 +184,7 @@ function initialize() {
   floor1 = new Map([], pc, [], [], fzero, fogfzero);
   //tileXsize
   //for (let e = 0; e < 3; e++) {
-  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 3, 3));
+  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 2, 5));
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 19, 11));
 
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 14, 15));
