@@ -1,5 +1,5 @@
 const strtbtn = document.getElementById("start");
-const contbtn = document.getElementById("");
+const contbtn = document.getElementById("instrucciones");
 const okbtn = document.getElementById("ok");
 var gameInterval;
 var framecount;
@@ -92,9 +92,18 @@ $(document).ready(function() {
   initialize();
   //instructionbtn = document.getElementById("controles");
   //strtbtn = document.getElementById("start");
+
+  $(okbtn).on("click", () => {
+    $(cnv).toggleClass("no-display");
+    playsnd.load();
+    winsnd.load();
+    lostsnd.load();
+  });
   $(instructionbtn).on("click", () => {});
   $(strtbtn).on("click", () => {
     $(cnv).toggleClass("no-display");
+    playsnd.play();
+    playsnd.loop = true;
     gameInterval = setInterval(function() {
       updateDisplay();
       drawPC();
@@ -162,10 +171,14 @@ function initialize() {
 }
 //$("");
 function finish(win) {
+  playsnd.pause();
+  playsnd.load();
   if (win) {
     ctx.drawImage(winim, 0, 0, cnv.width, cnv.height);
+    winsnd.play();
   } else {
     ctx.drawImage(loseim, 0, 0, cnv.width, cnv.height);
+    lostsnd.play();
   }
   clearInterval(gameInterval);
   //display widifferent images depending
