@@ -20,6 +20,9 @@ const loseim = new Image();
 const tableim = new Image();
 const doorsnd = document.getElementById("doorsnd");
 const ringsnd = document.getElementById("ringsnd");
+const winsnd = document.getElementById("winsnd");
+const lostsnd = document.getElementById("youlostsnd");
+const playsnd = document.getElementById("play");
 //const playsnd
 //$("#doorsnd");
 
@@ -150,8 +153,11 @@ function initialize() {
   //tileXsize
   //for (let e = 0; e < 3; e++) {
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 3, 3));
+  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 19, 11));
+
+  humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 14, 15));
   //}
-  //floor1.humans = humans;
+  floor1.humans = humans;
   framecount = 0;
 }
 //$("");
