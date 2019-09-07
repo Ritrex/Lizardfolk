@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   //floorim.src = "./../../css/img/floor2.png";
   floorim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/wood1.png";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/wood1.jpg";
   //wallim.src = "./../../css/img/simplewall.png";
   wallim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/simplewall.jpg";
@@ -156,8 +156,11 @@ function initialize() {
 }
 //$("");
 function finish(win) {
-  if (win) ctx.drawImage(winim, 0, 0, cnv.width, cnv.height);
-  else ctx.drawImage(loseim, 0, 0, cnv.width, cnv.height);
+  if (win) {
+    ctx.drawImage(winim, 0, 0, cnv.width, cnv.height);
+  } else {
+    ctx.drawImage(loseim, 0, 0, cnv.width, cnv.height);
+  }
   clearInterval(gameInterval);
   //display widifferent images depending
   //ctx.clearRect(0, 0, cnv.width, cnv.height);

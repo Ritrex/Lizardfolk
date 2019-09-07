@@ -105,7 +105,7 @@ main {
 
 html {
   background-color: #020202;
-  background-image: url("./img/black.jpeg");
+  background-image: url("https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/black.jpeg");
   background-repeat: repeat;
   background-size: cover;
 }
@@ -114,7 +114,7 @@ html {
   cursor: pointer;
   border: 1in;
   color: aliceblue;
-  background-image: url("./img/gooserock.jpg  ");
+  background-image: url("https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/gooserock.jpg  ");
   background-size: cover;
   background-repeat: no-repeat;
 }
