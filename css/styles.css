@@ -5,3 +5,116 @@
 .display {
   display: block;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  /*
+  background-color: #020202;
+  background-image: url("./img/black.jpeg");
+  background-repeat: repeat;
+  background-size: cover;
+  */
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  /*flex*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.marco {
+  background-image: url("./css/img/retro.jpeg");
+  margin: 100;
+  padding: 0;
+  transform: rotate(270deg);
+  height: 100%;
+  width: 43%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contenido-diary {
+  height: 10px;
+  transition: 1s;
+  overflow: hidden;
+}
+.diary:hover .contenido-diary {
+  height: 545px;
+  transition: 1s;
+}
+.principalP {
+  width: 420px;
+  height: 95px;
+
+  background: url(https://i.imgur.com/zUREMmE.png);
+  /*text-align: center;*/
+  vertical-align: middle;
+  align-content: center;
+  color: #020202;
+}
+.bodyP {
+  width: 420px;
+  background: url(https://i.imgur.com/9aSfasV.png);
+}
+.content-Text {
+  padding: 35px;
+  color: #000;
+  line-height: 140%;
+  text-align: justify;
+  font-family: satisfy;
+  font-size: 15px;
+  font-weight: normal;
+}
+.textTitle {
+  text-align: left;
+}
+.endP {
+  width: 420px;
+  height: 95px;
+  background: url(https://i.imgur.com/CfS6uKg.png);
+  margin-top: -15px;
+}
+.Titulo {
+  padding: 35px;
+  color: #fff;
+  line-height: 140%;
+  text-align: justify;
+  font-family: satisfy;
+  font-size: 150px;
+  font-weight: normal;
+}
+
+.cnv-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+html {
+  background-color: #020202;
+  background-image: url("./img/black.jpeg");
+  background-repeat: repeat;
+  background-size: cover;
+}
+
+.boton-menu {
+  cursor: pointer;
+  border: 1in;
+  color: aliceblue;
+  background-image: url("./img/gooserock.jpg  ");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

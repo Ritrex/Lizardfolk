@@ -1,9 +1,13 @@
-var strtbtn;
+const strtbtn = document.getElementById("start");
+const contbtn = document.getElementById("");
+const okbtn = document.getElementById("ok");
 var gameInterval;
 var framecount;
+const instructionbtn = document.getElementById("controles");
 const floorim = new Image();
 const wallim = new Image();
 const pcim = new Image();
+const greypcim = new Image();
 const fogim = new Image();
 const opencupim = new Image();
 const closedcupim = new Image();
@@ -13,25 +17,32 @@ const youdiedim = new Image();
 const ringim = new Image();
 const winim = new Image();
 const loseim = new Image();
+const tableim = new Image();
+const doorsnd = document.getElementById("doorsnd");
+const ringsnd = document.getElementById("ringsnd");
+//const playsnd
+//$("#doorsnd");
+
 $(document).ready(function() {
   cnv = document.getElementById("cnv");
   ctx = cnv.getContext("2d");
+  doorsnd.volume = 0.5;
+  cnv.width = window.innerWidth;
+  cnv.height = window.innerHeight;
+  tileXsize = cnv.width / 35;
+  tileYsize = cnv.height / 35;
 
-  cnv.width = (window.innerWidth / 5) * 4;
-  tileXsize = cnv.width / 40;
-  tileYsize = cnv.height / 40;
-
-  im = new Image();
+  //im = new Image();
   //Cada imagen que se va a usar tiene que mandarse a llamar al menos una vez aqui
   //para que no se tenga que estar cargando al momento.
   //Esto evita que solo se carguen fragmentos del labetirno o que no se imprima.
 
   //floorim.src = "./../../css/img/floor2.png";
   floorim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/floor.png";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/wood1.png";
   //wallim.src = "./../../css/img/simplewall.png";
   wallim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/simplewall.png";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/simplewall.jpg";
   //pcim.src = "./../../css/img/pcfaacingnorth.png";
   pcim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/pcfaacingnorth.png";
@@ -43,10 +54,10 @@ $(document).ready(function() {
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/soundsrc.png";
   //opencupim.src = "./../../css/img/greyopencupboard.png";
   opencupim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greyopencupboard.png";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/opencupboard.png";
   //closedcupim.src = "./../../css/img/greyclosedcupboard.png";
   closedcupim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greyclosedcupboard.png";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/closedcupboard.png";
   //humanim.src = "./../../css/img/human.png";
   humanim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/human.png";
@@ -62,11 +73,23 @@ $(document).ready(function() {
   winim.src =
     "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/win1.jpg";
   loseim.src =
-    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/lose.jpg";
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/youdied.jpg";
+
+  //tableim.src = "./../../css/img/table.png";
+  tableim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/table.png";
+  // winim.src =
+  //   "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/table.png";
+
+  greypcim.src =
+    "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greypcfaacingnorth.png";
+  // winim.src =
+  //   "https://raw.githubusercontent.com/Ritrex/Lizardfolk/master/css/img/greypcfaacingnorth.png";
 
   initialize();
-
-  strtbtn = document.getElementById("start");
+  //instructionbtn = document.getElementById("controles");
+  //strtbtn = document.getElementById("start");
+  $(instructionbtn).on("click", () => {});
   $(strtbtn).on("click", () => {
     $(cnv).toggleClass("no-display");
     gameInterval = setInterval(function() {
@@ -122,13 +145,13 @@ function initialize() {
   pc = new Lizard(tileXsize, tileYsize, [pcim], 1, 1);
   humans = [];
   console.log(pc.x);
-
+  //floor1 = map1;
   floor1 = new Map([], pc, [], [], fzero, fogfzero);
   //tileXsize
   //for (let e = 0; e < 3; e++) {
   humans.push(new Human(tileXsize, tileYsize, [soundsrcim], 3, 3));
   //}
-  floor1.humans = humans;
+  //floor1.humans = humans;
   framecount = 0;
 }
 //$("");

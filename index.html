@@ -11,32 +11,101 @@
     <title>Document</title>
   </head>
   <body>
-    <section class="uk-flex">
-      <canvas
-        class="uk-flex-center no-display"
-        id="cnv"
-        width="800"
-        height="600"
-      ></canvas>
+    <div class="Titulo">
+      <link
+        href="https://fonts.googleapis.com/css?family=Satisfy"
+        rel="stylesheet"
+        type="text/css"
+      />
+      Lizardfolk
+    </div>
+    <main>
+      <link
+        href="https://fonts.googleapis.com/css?family=Satisfy"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <div class="diary no-display" id="instrucciones">
+        <div class="principalP"></div>
+        <div class="contenido-diary bodyP">
+          <div class="content-Text">
+            <div class="textTitle">Instrucciones</div>
+            <div class="buttons">
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/outlined-input-icons-gestures/200/tutorial_wasd-512.png"
+                alt="buttons"
+                height="150"
+                width="150"
+              />
+            </div>
+            <div><p>W: Arriba</p></div>
+
+            <p>D: Derecha</p>
+            <p>S: Abajo</p>
+            <p>A: Izquierda</p>
+          </div>
+        </div>
+        <div class="endP"></div>
+      </div>
+
+      <div class="diary no-display" id="hisoria">
+        <div class="principalP "></div>
+        <div class="contenido-diary bodyP ">
+          <div class="content-Text">
+            <div class="textTitle">Historia</div>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+            sed quia non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+            aliquid ex ea commodi consequatur? Quis autem vel eum iure
+            reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+            pariatur? Sed ut perspiciatis unde omnis iste natus error sit
+            voluptatem accusantium doloremque laudantium, totam rem aperiam,
+            eaque ipsa quae ab illo inventore veritatis et quasi architecto
+            beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+            voluptas sit aspernatur aut odit aut fugit.
+          </div>
+        </div>
+        <div class="endP no-display"></div>
+      </div>
+    </main>
+    <section class="cnv-cont">
+      <canvas class=" no-display" id="cnv" width="800" height="600"></canvas>
+      <div class="uk-flex-middle uk-flex-center uk-flex no-display">
+        <button id="OK">
+          OK
+        </button>
+      </div>
     </section>
 
     <footer class="uk-flex-center">
-      <div class="uk-flex-middle uk-flex-center uk-flex">
-        <button id="start" class="uk-flex-middle uk-flex-center">START</button>
+      <div
+        class=" marcouk-flex-middle uk-flex-center uk-flex boton-menu"
+        id="start"
+      >
+        Comenzar
+        <!-- <button id="start" class="uk-flex-middle uk-flex-center">
+          Comenzar
+        </button> -->
       </div>
-      <div class="uk-flex-middle uk-flex-center uk-flex">
-        <button id="instrucciones" class="uk-flex-middle uk-flex-center">
-          instrucciones
-        </button>
-      </div>
-
-      <div class="uk-flex-middle uk-flex-center uk-flex">
-        <button id="sth">
-          something
-        </button>
+      <div
+        class="uk-flex-middle uk-flex-center uk-flex boton-menu"
+        id="controles"
+      >
+        Controles
+        <!-- <img src="./css/img/gooserock.jpg" alt="" height="100" width="50" /> 
+        <button id="controles" class="uk-flex-middle uk-flex-center"></button>-->
       </div>
     </footer>
-
+    <audio src="./css/snd/door.wav" id="doorsnd"></audio>
+    <audio src="./css/snd/metal-ringing.wav" id="ringsnd"></audio>
     <!-- nav off, background, -->
 
     <script src="./js/lib/jquery-3.4.1.min.js"></script>

@@ -169,9 +169,10 @@ class Human extends Character {
     let moves = this.getPossibleMoves(floor1, this.x, this.y, ["T", "C", "."]);
     let pick;
     console.log(`Human: ${this.x},${this.y},${moves}`);
+    let lizardPostion = floor1.layout[pc.x][pc.y];
     if (
-      ["C", "T"].indexOf(floor1.layout[pc.x][pc.y]) > -1 ||
-      Math.sqrt((pc.x - this.x) ** 2 + (pc.y - this.y) ** 2) < 10 * sq2
+      ["C", "T"].indexOf(lizardPostion) > -1 ||
+      Math.sqrt((pc.x - this.x) ** 2 + (pc.y - this.y) ** 2) > 7 * sq2
     ) {
       pick = moves[~~(Math.random() * moves.length)];
     } else {
@@ -207,6 +208,8 @@ class Human extends Character {
             best_move = "W";
           }
         }
+        if (best_move === "Q")
+          best_move = moves[~~(Math.random() * moves.length)];
         pick = best_move;
       });
     }

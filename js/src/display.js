@@ -3,6 +3,7 @@ var ctx;
 var tileXsize;
 var tileYsize;
 var floor1;
+
 function setCoveredDisplay() {
   let tw = tileXsize;
   let th = tileYsize;
@@ -61,9 +62,9 @@ function updateDisplay() {
           ctx.drawImage(
             closedcupim,
             (1 + j) * tw,
-            (1 + i) * th,
+            i * th,
             tileXsize,
-            tileYsize
+            tileYsize * 2
           );
         }
         if (floor1.maptxt[i][j] === "T") {
@@ -75,7 +76,7 @@ function updateDisplay() {
             tileYsize
           );
           ctx.drawImage(
-            closedcupim,
+            tableim,
             (1 + j) * tw,
             (1 + i) * th,
             tileXsize,
@@ -109,13 +110,23 @@ function updateDisplay() {
 //console.log(`PC: ${im.src}`);
 
 function drawPC() {
-  ctx.drawImage(
-    pcim,
-    tileXsize * (1 + pc.y),
-    tileYsize * (1 + pc.x),
-    tileXsize,
-    tileYsize
-  );
+  let currentTile = floor1.layout[pc.x][pc.y];
+  if (currentTile === "C" || currentTile === "T")
+    ctx.drawImage(
+      greypcim,
+      tileXsize * (1 + pc.y),
+      tileYsize * (1 + pc.x),
+      tileXsize,
+      tileYsize
+    );
+  else
+    ctx.drawImage(
+      pcim,
+      tileXsize * (1 + pc.y),
+      tileYsize * (1 + pc.x),
+      tileXsize,
+      tileYsize
+    );
 }
 function drawHuman(human) {
   ctx.drawImage(
